@@ -324,17 +324,23 @@ class Private_Data:
             _("Z Both Limit"), _("A Both Limit"), _("All Limits")]
 
         (   S.UNUSED_PWM,
-            S.X_PWM_PULSE,S.X_PWM_DIR,S.X_PWM_ENABLE,S.Y_PWM_PULSE,S.Y_PWM_DIR,S.Y_PWM_ENABLE,
-            S.Z_PWM_PULSE,S.Z_PWM_DIR,S.Z_PWM_ENABLE,S.A_PWM_PULSE,S.A_PWM_DIR,S.A_PWM_ENABLE,
-            S.SPINDLE_PWM_PULSE,S.SPINDLE_PWM_DIR,S.SPINDLE_PWM_ENABLE
+            S.X_PWM_PULSE,S.X_PWM_DIR,S.X_PWM_ENABLE,  S.Y_PWM_PULSE,S.Y_PWM_DIR,S.Y_PWM_ENABLE,
+            S.Z_PWM_PULSE,S.Z_PWM_DIR,S.Z_PWM_ENABLE,  S.A_PWM_PULSE,S.A_PWM_DIR,S.A_PWM_ENABLE,
+            S.SPINDLE_PWM_PULSE,S.SPINDLE_PWM_DIR,S.SPINDLE_PWM_ENABLE,
+            S.X2_PWM_PULSE,S.X2_PWM_DIR,S.X2_PWM_ENABLE,  S.Y2_PWM_PULSE,S.Y2_PWM_DIR,S.Y2_PWM_ENABLE,
+            S.Z2_PWM_PULSE,S.Z2_PWM_DIR,S.Z2_PWM_ENABLE
         ) = self.hal_pwm_output_names = [
             "unused-pwm",
             "x-pwm-pulse", "x-pwm-dir", "x-pwm-enable", "y-pwm-pulse", "y-pwm-dir", "y-pwm-enable",
             "z-pwm-pulse", "z-pwm-dir", "z-pwm-enable", "a-pwm-pulse", "a-pwm-dir", "a-pwm-enable", 
-            "s-pwm-pulse", "s-pwm-dir", "s-pwm-enable"]
+            "s-pwm-pulse", "s-pwm-dir", "s-pwm-enable",
+            "x2-pwm-pulse", "x2-pwm-dir", "x2-pwm-enable", "y2-pwm-pulse", "y2-pwm-dir", "y2-pwm-enable",
+            "z2-pwm-pulse", "z2-pwm-dir", "z2-pwm-enable"]
 
+        tpwm = [_("X2 Tandem PWM"),_("Y2 Tandem PWM"), _("Z2 Tandem PWM")]
         self.human_pwm_output_names =[ [_("Unused PWM Gen"),[]],[_("X Axis PWM"),[]],[_("Y Axis PWM"),[]],
-            [_("Z Axis PWM"),[]],[_("A Axis PWM"),[]],[_("Spindle PWM"),[]],[_("Custom Signals"),[]] ]
+            [_("Z Axis PWM"),[]],[_("A Axis PWM"),[]],[_("Spindle PWM"),[]],[_("Tandem Axis Encoder"), tpwm],
+            [_("Custom Signals"),[]] ]
 
         (   S.UNUSED_ENCODER,
             S.X_ENCODER_A,S.X_ENCODER_B,S.X_ENCODER_I,S.X_ENCODER_M,
@@ -346,7 +352,10 @@ class Private_Data:
             S.Z_MPG_A,S.Z_MPG_B,S.Z_MPG_I,S.Z_MPG_M,S.A_MPG_A,S.A_MPG_B,S.A_MPG_I,A_MPG_M,
             S.SELECT_MPG_A,S.SELECT_MPG_B,S.SELECT_MPG_I,S.SELECT_MPG_M,
             S.FO_MPG_A,FO_MPG_B,FO_MPG_I,FO_MPG_M,SO_MPG_A,SO_MPG_B,SO_MPG_I,SO_MPG_I,
-            S.MVO_MPG_A,MVO_MPG_B,MVO_MPG_I,MVO_MPG_I
+            S.MVO_MPG_A,MVO_MPG_B,MVO_MPG_I,MVO_MPG_I,
+            S.X2_ENCODER_A,S.X2_ENCODER_B,S.X2_ENCODER_I,S.X2_ENCODER_M,
+            S.Y2_ENCODER_A,S.Y2_ENCODER_B,S.Y2_ENCODER_I,S.Y2_ENCODER_M,
+            S.Z2_ENCODER_A,S.Z2_ENCODER_B,S.Z2_ENCODER_I,S.Z2_ENCODER_M,
         )  = self.hal_encoder_input_names = [
              "unused-encoder",
             "x-encoder-a", "x-encoder-b", "x-encoder-i", "x-encoder-m",
@@ -358,13 +367,17 @@ class Private_Data:
             "z-mpg-a","z-mpg-b", "z-mpg-i", "z-mpg-m", "a-mpg-a", "a-mpg-b", "a-mpg-i", "a-mpg-m",
             "select-mpg-a", "select-mpg-b", "select-mpg-i", "select-mpg-m",
             "fo-mpg-a","fo-mpg-b","fo-mpg-i","fo-mpg-m","so-mpg-a","so-mpg-b","so-mpg-i","so-mpg-m",
-            "mvo-mpg-a","mvo-mpg-b","mvo-mpg-i","mvo-mpg-m"]
+            "mvo-mpg-a","mvo-mpg-b","mvo-mpg-i","mvo-mpg-m",
+            "x2-encoder-a", "x2-encoder-b", "x2-encoder-i", "x2-encoder-m",
+            "y2-encoder-a", "y2-encoder-b", "y2-encoder-i", "y2-encoder-m",
+            "z2-encoder-a", "z2-encoder-b", "z2-encoder-i", "z2-encoder-m",]
 
         axis = [_("X Encoder"),_("Y Encoder"), _("Z Encoder"),_("A Encoder"),_("Spindle Encoder")]
+        taxis = [_("X2 Tandem Encoder"),_("Y2 Tandem Encoder"), _("Z2 Tandem Encoder")]
         mpg = [_("X Hand Wheel"), _("Y Hand Wheel"), _("Z Hand Wheel"), _("A Hand Wheel") ,_("Multi Hand Wheel")]
         over = [_("Feed Override"),_("spindle Override"),_("Max Vel Override")]
         self.human_encoder_input_names = [ [_("Unused Encoder"),[]],[_("Axis Encoder"), axis],
-            [_("MPG Jog Controls"), mpg],[_("Override MPG control"), over],
+            [_("MPG Jog Controls"), mpg],[_("Override MPG control"), over],[_("Tandem Axis Encoder"), taxis],
             [_("Custom Signals"),[]] ]
 
         self.human_resolver_input_names =[ [_("Unused Resolver"),[]],[_("X Resolver"), []],
