@@ -203,22 +203,88 @@ class Private_Data:
             [_("Coolant"),coolant_output],[_("Control"),control_output],
             [_("Digital"),digital_output],[_("X BLDC Control"),xmotor_control],
             [_("Y BLDC Control"),ymotor_control],[_("Z BLDC Control"),zmotor_control],
-            [_("A BLDC Control"),amotor_control],[_(" S BLDC Control"),smotor_control],
+            [_("A BLDC Control"),amotor_control],[_(" S BLDC Control"),smotor_control,],
             [_("Custom Signals"),[]]  ]
 
-        limit = [_("X Minimum Limit"), _("Y Minimum Limit"), _("Z Minimum Limit"), _("A Minimum Limit"),
-            _("X Maximum Limit"), _("Y Maximum Limit"), _("Z Maximum Limit"), _("A Maximum Limit"),
-            _("X Both Limit"), _("Y Both Limit"), _("Z Both Limit"), _("A Both Limit"),
-            _("All Limits") ]
-        home = [_("X Home"), _("Y Home"), _("Z Home"), _("A Home"),_("All Home") ]
+        ###
+        (   S.UNUSED_INPUT,
+            S.MIN_X,S.MIN_Y,S.MIN_Z,S.MIN_A,
+            S.MAX_X,S.MAX_Y,S.MAX_Z,S.MAX_A,
+            S.BOTH_X,S.BOTH_Y,S.BOTH_Z,S.BOTH_A,S.ALL_LIMIT,
+            S.HOME_X,S.HOME_Y,S.HOME_Z,S.HOME_A,S.ALL_HOME,
+            S.MIN_HOME_X,S.MIN_HOME_Y,S.MIN_HOME_Z,S.MIN_HOME_A,
+            S.MAX_HOME_X,S.MAX_HOME_Y,S.MAX_HOME_Z,S.MAX_HOME_A,
+            S.BOTH_HOME_X,S.BOTH_HOME_Y,S.BOTH_HOME_Z,S.BOTH_HOME_A,S.ALL_LIMIT_HOME,
+            S.DIN0,S.DIN1,S.DIN2,S.DIN3,
+            S.SELECT_A,S.SELECT_B,S.SELECT_C,S.SELECT_D,
+            S.JOGA,S.JOGB,S.JOGC,S.JOGD,S.FOA,S.FOB,S.FOC,S.FOD,
+            S.SOA,S.SOB,S.SOC,S.SOD,S.MVOA,S.MVOB,S.MVOC,S.MVOD,
+            S.FOE,S.SOE,S.MVOE,
+            S.SPINDLE_CW,S.SPINDLE_CCW,S.SPINDLE_STOP,S.SPINDLE_AT_SPEED,S.GEAR_SELECT_A,
+            S.CYCLE_START,S.ABORT,S.SINGLE_STEP,
+            S.ESTOP_IN,S.PROBE,
+            S.JOGX_P,S.JOGX_N,S.JOGY_P,S.JOGY_N,S.JOGZ_P,S.JOGZ_N,S.JOGA_P,S.JOGA_N,S.JOGSLCT_P,S.JOGSLCT_N,
+            S.X_HALL1_IN,S.X_HALL2_IN,S.X_HALL3_IN,S.X_C1_IN,S.X_C2_IN,S.X_C4_IN,S.X_C8_IN,
+            S.Y_HALL1_IN,S.Y_HALL2_IN,S.Y_HALL3_IN,S.Y_C1_IN,S.Y_C2_IN,S.Y_C4_IN,S.Y_C8_IN,
+            S.Z_HALL1_IN,S.Z_HALL2_IN,S.Z_HALL3_IN,S.Z_C1_IN,S.Z_C2_IN,S.Z_C4_IN,S.Z_C8_IN,
+            S.A_HALL1_IN,S.A_HALL2_IN,S.A_HALL3_IN,S.A_C1_IN,S.A_C2_IN,S.A_C4_IN,S.A_C8_IN,
+            S.S_HALL1_IN,S.S_HALL2_IN,S.S_HALL3_IN,S.S_C1_IN,S.S_C2_IN,S.S_C4_IN,S.S_C8_IN,
+            S.MIN_X2,S.MIN_Y2,S.MIN_Z2,S.MIN_A2,
+            S.MAX_X2,S.MAX_Y2,S.MAX_Z2,S.MAX_A2,
+            S.BOTH_X2,S.BOTH_Y2,S.BOTH_Z2,S.BOTH_A2,S.ALL_LIMIT,
+            S.HOME_X2,S.HOME_Y2,S.HOME_Z2,S.HOME_A2,S.ALL_HOME,
+            S.MIN_HOME_X2,S.MIN_HOME_Y2,S.MIN_HOME_Z2,S.MIN_HOME_A2,
+            S.MAX_HOME_X2,S.MAX_HOME_Y2,S.MAX_HOME_Z2,S.MAX_HOME_A2,
+            S.BOTH_HOME_X2,S.BOTH_HOME_Y2,S.BOTH_HOME_Z2,S.BOTH_HOME_A2
+        ) = self.hal_input_names = [
+            "unused-input",
+            "min-x", "min-y", "min-z", "min-a",
+            "max-x", "max-y", "max-z", "max-a",
+            "both-x", "both-y", "both-z", "both-a","all-limit",
+            "home-x", "home-y", "home-z", "home-a","all-home",
+            "min-home-x", "min-home-y", "min-home-z", "min-home-a",
+            "max-home-x", "max-home-y", "max-home-z", "max-home-a",
+            "both-home-x", "both-home-y", "both-home-z", "both-home-a", "all-limit-home",
+            "din-00", "din-01", "din-02", "din-03",
+            "joint-select-a","joint-select-b","joint-select-c","joint-select-d",
+            "jog-incr-a","jog-incr-b","jog-incr-c","jog-incr-d","fo-incr-a","fo-incr-b","fo-incr-c","fo-incr-d",
+            "so-incr-a","so-incr-b","so-incr-c","so-incr-d","mvo-incr-a","mvo-incr-b","mvo-incr-c","mvo-incr-d",
+            "fo-enable","so-enable","mvo-enable",
+            "spindle-manual-cw","spindle-manual-ccw","spindle-manual-stop","spindle-at-speed","gear-select-a",
+            "cycle-start","abort","single-step",
+            "estop-ext", "probe-in",
+            "jog-x-pos","jog-x-neg","jog-y-pos","jog-y-neg",
+            "jog-z-pos","jog-z-neg","jog-a-pos","jog-a-neg","jog-selected-pos","jog-selected-neg",
+            "x-hall1-in","x-hall2-in","x-hall3-in","x-gray-c1-in","x-gray-c2-in","x-gray-C4-in","x-gray-C8-in",
+            "y-hall1-in","y-hall2-in","y-hall3-in","y-gray-c1-in","y-gray-c2-in","y-gray-C4-in","y-gray-C8-in",
+            "z-hall1-in","z-hall2-in","z-hall3-in","z-gray-c1-in","z-gray-c2-in","z-gray-C4-in","z-gray-C8-in",
+            "a-hall1-in","a-hall2-in","a-hall3-in","a-gray-c1-in","a-gray-c2-in","a-gray-C4-in","a-gray-C8-in",
+            "s-hall1-in","s-hall2-in","s-hall3-in","s-gray-c1-in","s-gray-c2-in","s-gray-C4-in","s-gray-C8-in" ,
+            "min-x2", "min-y2", "min-z2", "min-a2",
+            "max-x2", "max-y2", "max-z2", "max-a2",
+            "both-x2", "both-y2", "both-z2", "both-a2","all-limit",
+            "home-x2", "home-y2", "home-z2", "home-a2","all-home",
+            "min-home-x2", "min-home-y2", "min-home-z2", "min-home-a2",
+            "max-home-x2", "max-home-y2", "max-home-z2", "max-home-a2",
+            "both-home-x2", "both-home-y2", "both-home-z2", "both-home-a2"]
 
-        home_limits_shared = [_("X Minimum Limit + Home"),
-            _("Y Minimum Limit + Home"), _("Z Minimum Limit + Home"),
-            _("A Minimum Limit + Home"),_("X Maximum Limit + Home"),
-            _("Y Maximum Limit + Home"), _("Z Maximum Limit + Home"),
-            _("A Maximum Limit + Home"),_("X Both Limit + Home"), 
-            _("Y Both Limit + Home"), _("Z Both Limit + Home"),
-            _("A Both Limit + Home"), _("All Limits + Home") ]
+        limit = [[_("X Minimum Limit"),S.MIN_X ], [_("Y Minimum Limit"),S.MIN_Y ], [_("Z Minimum Limit"),S.MIN_Z ], [_("A Minimum Limit"),S.MIN_A ],
+            [_("X Maximum Limit"),S.MAX_X ], [_("Y Maximum Limit"),S.MAX_Y ], [_("Z Maximum Limit"),S.MAX_Z ], [_("A Maximum Limit"),S.MAX_A ],
+            [_("X Both Limit"),S.BOTH_X ], [_("Y Both Limit"),S.BOTH_Y ], [_("Z Both Limit"),S.BOTH_Z ], [_("A Both Limit"), S.BOTH_A],
+            [_("All Limits"),S.ALL_LIMIT] ]
+        limit2 = [[_("X2 Minimum Limit"),S.MIN_X2 ], [_("Y2 Minimum Limit"),S.MIN_Y2 ], [_("Z2 Minimum Limit"),S.MIN_Z2 ], [_("A2 Minimum Limit"),S.MIN_A2 ],
+            [_("X2 Maximum Limit"),S.MAX_X2 ], [_("Y2 Maximum Limit"),S.MAX_Y2 ], [_("Z2 Maximum Limit"),S.MAX_Z2 ], [_("A2 Maximum Limit"),S.MAX_A2 ],
+            [_("X2 Both Limit"),S.BOTH_X2 ], [_("Y2 Both Limit"),S.BOTH_Y2 ], [_("Z2 Both Limit"),S.BOTH_Z2 ], [_("A2 Both Limit"), S.BOTH_A2], ]
+
+        home = [[_("X Home"),S.HOME_X ], [_("Y Home"),S.HOME_Y ], [_("Z Home"),S.HOME_Z ], [_("A Home"),S.HOME_A ],[_("All Home"),S.ALL_HOME ] ]
+        home2 = [[_("X2 Tandem Home"),S.HOME_X2 ], [_("Y2 Tandem Home"),S.HOME_Y2 ], [_("Z2 Tandem Home"),S.HOME_Z2 ], [_("A2 Tandem Home"),S.HOME_A2 ] ]
+        home_limits_shared = [[_("X Minimum Limit + Home"),S.MIN_HOME_X ],
+            [_("Y Minimum Limit + Home"),S.MIN_HOME_Y ], [_("Z Minimum Limit + Home"),S.MIN_HOME_Z ],
+            [_("A Minimum Limit + Home"),S.MIN_HOME_A ],[_("X Maximum Limit + Home"),S.MAX_HOME_X ],
+            [_("Y Maximum Limit + Home"),S.MAX_HOME_Y ], [_("Z Maximum Limit + Home"),S.MAX_HOME_Z ],
+            [_("A Maximum Limit + Home"),S.MAX_HOME_A ],[_("X Both Limit + Home"),S.BOTH_HOME_X ], 
+            [_("Y Both Limit + Home"),S.BOTH_HOME_Y ], [_("Z Both Limit + Home"),S.BOTH_HOME_Z ],
+            [_("A Both Limit + Home"),S.BOTH_HOME_A ], [_("All Limits + Home"),S.ALL_LIMIT_HOME ] ]
 
         digital = [ _("Digital in 0"), _("Digital in 1"), _("Digital in 2"), _("Digital in 3") ]
         axis_select = [_("Joint select A"),_("Joint select B"),_("Joint select C"), _("Joint select D") ]
@@ -247,62 +313,46 @@ class Private_Data:
             _("Jog Z +"),_("Jog Z -"),_("Jog A +"),_("Jog A -"),
             _("Jog button selected +"),_("Jog button selected -") ]
 
-        self.human_input_names = [ [_("Unused Input"),[]],[_("Limits"),limit],
-            [_("Home"),home],[_("Limts/Home Shared"),home_limits_shared],
+        #axis_select = [[_("Joint select A"),S.SELECT_A ],[_("Joint select B"),S.SELECT_B ],[_("Joint select C"),S.SELECT_C ], [_("Joint select D"),S.SELECT_D ] ]
+        #override = [[_("Jog incr A"),S.JOGA ],[_("Jog incr B"),S.JOGB ],[_("Jog incr C"),S.JOGC ],
+        #    [_("Jog incr D"),S.JOGD ],[_("Feed Override incr A"),S.FOA ],[_("Feed Override incr B"), S.FOB],
+        #    [_("Feed Override incr C"),S.FOC ],[_("Feed Override incr D"),S.FOD ],[_("Spindle Override incr A"),S.SOA ],
+        #    [_("Spindle Override incr B"),S.SOB ],[_("Spindle Override incr C"),S.SOC ],[_("Spindle Override incr D"),S.SOD ],
+        #    [_("Max Vel Override incr A"),S.MVOA ],[_("Max Vel Override incr B"),S.MVOB ],[_("Max Vel Override incr C"),S.MVOC ],
+        #    [_("Max Vel Override incr D"),S.MVOD ], [_("Feed Override enable"),S.FOE ], [_("Spindle Override enable"),S.SOE ],
+        #    [_("Max Vel Override enable"),S.MVOE ] ]
+        #spindle = [ [_("Manual Spindle CW"),S.SPINDLE_CW ],[_("Manual Spindle CCW"),S.SPINDLE_CCW ],[_("Manual Spindle Stop"),S.SPINDLE_STOP ],
+        #    [_("Spindle Up-To-Speed"),S.SPINDLE_AT_SPEED ],[_("Gear Select A"),S.GEAR_SELECT_A ] ]
+        #operation =  [[_("Cycle Start"),S.CYCLE_START ],[_("Abort"),S.ABORT ],[_("Single Step"),S.SINGLE_STEP ] ]
+        #control = [[_("ESTOP In"),S.ESTOP_IN ], [_("Probe In"),S.PROBE ] ]
+        #rapid = [[_("Jog X +"),S.JOGX_P ],[_("Jog X -"),S.JOGX_N ],[_("Jog Y +"),S.JOGY_P ],[_("Jog Y -"),S.JOGY_N ],
+        #    [_("Jog Z +"),S.JOGZ_P ],[_("Jog Z -"),S.JOGZ_N ],[_("Jog A +"),S.JOGA_P ],[_("Jog A -"),S.JOGA_N ],
+        #    [_("Jog button selected +"),S.JOGSLCT_P ],[_("Jog button selected -"),S.JOGSLCT_N ] ]
+        #xmotor_control = [[_("X HALL 1"),S.X_HALL1_IN ],[_("X HALL 2"),S.X_HALL2_IN ],[_("X HALL 3"),S.X_HALL3_IN ],
+        #    [_("X Gray C1"),S.X_C1_IN ],[_("X Gray C2"),S.X_C2_IN ],[_("X Gray C4"),S.X_C4_IN ],[_("X Gray C8"),S.X_C8_IN ]]
+        #ymotor_control = [[_("Y HALL 1"),S.Y_HALL1_IN ],[_("Y HALL 2"),S.Y_HALL2_IN ],[_("Y HALL 3"),S.Y_HALL3_IN ],
+        #    [_("Y Gray C1"),S.Y_C1_IN ],[_("Y Gray C2"),S.Y_C2_IN ],[_("Y Gray C4"),S.Y_C4_IN ],[_("Y Gray C8"),S.Y_C8_IN ]]
+        #zmotor_control = [[_("Z HALL 1"),S.Z_HALL1_IN ],[_("Z HALL 2"),S.Z_HALL2_IN ],[_("Z HALL 3"),S.Z_HALL1_IN ],
+        #    [_("Z Gray C1"),S.Z_C1_IN ],[_("Z Gray C2"),S.Z_C2_IN ],[_("Z Gray C4"),S.Z_C4_IN ],[_("Z Gray C8"),S.Z_C8_IN ]]
+        #amotor_control = [[_("A HALL 1"),S.A_HALL1_IN ],[_("A HALL 2"),S.A_HALL2_IN ],[_("A HALL 3"),S.A_HALL3_IN ],
+        #    [_("A Gray C1"),S.A_C1_IN ],[_("A Gray C2"),S.A_C2_IN ],[_("A Gray C4"),S.A_C4_IN ],[_("A Gray C8"),S.A_C8_IN ]]
+        #smotor_control = [[_("S HALL 1"),S.S_HALL1_IN ],[_("S HALL 2"),S.S_HALL2_IN ],[_("S HALL 3"),S.S_HALL3_IN ],
+        #    [_("S Gray C1"),S.S_C1_IN ],[_("S Gray C2"),S.S_C2_IN ],[_("S Gray C4"),S.S_C4_IN ],[_("S Gray C8"),S.S_C8_IN ]]
+
+
+        #limits = [_("Limits"),limit],[_("Home"),home],[_("Limts/Home Shared")]
+        #tlimits = [_("T Limits"),limit],[_("T Home"),home],[_("T Limts/Home Shared")]
+        blimits = [["Main Axis",limit],["Tandem Axis",limit2]]
+        bhome = [["Main Axis",home],["Tandem Axis",home2]]
+        bshared = [["Main Axis",home_limits_shared],["Tandem Axis",home_limits_shared]]
+        self.human_input_names = [ [_("Unused Input"),[]],[_("Limits"),blimits],
+            [_("Home"),bhome],[_("Limts/Home Shared"),bshared],
             [_("Digital"),digital],[_("Axis Selection"),axis_select],[_("Overrides"),override],
             [_("Spindle"),spindle],[_("Operation"),operation],[_("External Control"),control],
             [_("Axis rapid"),rapid],[_("X BLDC Control"),xmotor_control],
             [_("Y BLDC Control"),ymotor_control],[_("Z BLDC Control"),zmotor_control],
             [_("A BLDC Control"),amotor_control],
             [_("S BLDC Control"),smotor_control],[_("Custom Signals"),[]] ]
-
-        (   S.UNUSED_INPUT,
-            S.MIN_X,S.MIN_Y,S.MIN_Z,S.MIN_A,
-            S.MAX_X,S.MAX_Y,S.MAX_Z,S.MAX_A,
-            S.BOTH_X,S.BOTH_Y,S.BOTH_Z,S.BOTH_A,S.ALL_LIMIT,
-            S.HOME_X,S.HOME_Y,S.HOME_Z,S.HOME_A,S.ALL_HOME,
-            S.MIN_HOME_X,S.MIN_HOME_Y,S.MIN_HOME_Z,S.MIN_HOME_A,
-            S.MAX_HOME_X,S.MAX_HOME_Y,S.MAX_HOME_Z,S.MAX_HOME_A,
-            S.BOTH_HOME_X,S.BOTH_HOME_Y,S.BOTH_HOME_Z,S.BOTH_HOME_A,S.ALL_LIMIT_HOME,
-            S.DIN0,S.DIN1,S.DIN2,S.DIN3,
-            S.SELECT_A,S.SELECT_B,S.SELECT_C,S.SELECT_D,
-            S.JOGA,S.JOGB,S.JOGC,S.JOGD,S.FOA,S.FOB,S.FOC,S.FOD,
-            S.SOA,S.SOB,S.SOC,S.SOD,S.MVOA,S.MVOB,S.MVOC,S.MVOD,
-            S.FOE,S.SOE,S.MVOE,
-            S.SPINDLE_CW,S.SPINDLE_CCW,S.SPINDLE_STOP,S.SPINDLE_AT_SPEED,S.GEAR_SELECT_A,
-            S.CYCLE_START,S.ABORT,S.SINGLE_STEP,
-            S.ESTOP_IN,S.PROBE,
-            S.JOGX_P,S.JOGX_N,S.JOGY_P,S.JOGY_N,S.JOGZ_P,S.JOGZ_N,S.JOGA_P,S.JOGA_N,S.JOGSLCT_P,S.JOGSLCT_N,
-            S.X_HALL1_IN,S.X_HALL2_IN,S.X_HALL3_IN,S.X_C1_IN,S.X_C2_IN,S.X_C4_IN,S.X_C8_IN,
-            S.Y_HALL1_IN,S.Y_HALL2_IN,S.Y_HALL3_IN,S.Y_C1_IN,S.Y_C2_IN,S.Y_C4_IN,S.Y_C8_IN,
-            S.Z_HALL1_IN,S.Z_HALL2_IN,S.Z_HALL3_IN,S.Z_C1_IN,S.Z_C2_IN,S.Z_C4_IN,S.Z_C8_IN,
-            S.A_HALL1_IN,S.A_HALL2_IN,S.A_HALL3_IN,S.A_C1_IN,S.A_C2_IN,S.A_C4_IN,S.A_C8_IN,
-            S.S_HALL1_IN,S_HALL2_IN,S_HALL3_IN,S_C1_IN,S_C2_IN,S_C4_IN,S_C8_IN 
-        ) = self.hal_input_names = [
-            "unused-input",
-            "min-x", "min-y", "min-z", "min-a",
-            "max-x", "max-y", "max-z", "max-a",
-            "both-x", "both-y", "both-z", "both-a","all-limit",
-            "home-x", "home-y", "home-z", "home-a","all-home",
-            "min-home-x", "min-home-y", "min-home-z", "min-home-a",
-            "max-home-x", "max-home-y", "max-home-z", "max-home-a",
-            "both-home-x", "both-home-y", "both-home-z", "both-home-a", "all-limit-home",
-            "din-00", "din-01", "din-02", "din-03",
-            "joint-select-a","joint-select-b","joint-select-c","joint-select-d",
-            "jog-incr-a","jog-incr-b","jog-incr-c","jog-incr-d","fo-incr-a","fo-incr-b","fo-incr-c","fo-incr-d",
-            "so-incr-a","so-incr-b","so-incr-c","so-incr-d","mvo-incr-a","mvo-incr-b","mvo-incr-c","mvo-incr-d",
-            "fo-enable","so-enable","mvo-enable",
-            "spindle-manual-cw","spindle-manual-ccw","spindle-manual-stop","spindle-at-speed","gear-select-a",
-            "cycle-start","abort","single-step",
-            "estop-ext", "probe-in",
-            "jog-x-pos","jog-x-neg","jog-y-pos","jog-y-neg",
-            "jog-z-pos","jog-z-neg","jog-a-pos","jog-a-neg","jog-selected-pos","jog-selected-neg",
-            "x-hall1-in","x-hall2-in","x-hall3-in","x-gray-c1-in","x-gray-c2-in","x-gray-C4-in","x-gray-C8-in",
-            "y-hall1-in","y-hall2-in","y-hall3-in","y-gray-c1-in","y-gray-c2-in","y-gray-C4-in","y-gray-C8-in",
-            "z-hall1-in","z-hall2-in","z-hall3-in","z-gray-c1-in","z-gray-c2-in","z-gray-C4-in","z-gray-C8-in",
-            "a-hall1-in","a-hall2-in","a-hall3-in","a-gray-c1-in","a-gray-c2-in","a-gray-C4-in","a-gray-C8-in",
-            "s-hall1-in","s-hall2-in","s-hall3-in","s-gray-c1-in","s-gray-c2-in","s-gray-C4-in","s-gray-C8-in" ]
-
 
         self.human_names_multi_jog_buttons = [_("Jog X +"),_("Jog X -"),
             _("Jog Y +"),_("Jog Y -"),

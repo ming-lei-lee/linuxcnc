@@ -1798,28 +1798,79 @@ PNCconf will use internal firmware data"%self._p.FIRMDIR),True)
             # treestore(parentname,parentnum,signalname,signaltreename,signal index number)
             self.d[item[0]]= gtk.TreeStore(str,int,str,str,int)
             for i,parent in enumerate(item[1]):
+                ############################
+                # if there are no children:
+                ############################
                 if len(parent[1]) == 0:
                     # if combobox has a 'custom' signal choice then the index must be 0
-                    if i == end and not item[0] =="_sserialsignaltree":temp = 0 
-                    else:temp = count
+                    if i == end and not item[0] =="_sserialsignaltree":parentnum = 0 
+                    else:parentnum = count
                     #print "length of human names:",len(parent[1])
-                    # this adds the index number (temp) of the signal
+                    # this adds the index number (parentnum) of the signal
                     try:
                         signame=_PD[item[3]][count]
                     except:
                         signame = 'none'
-                    piter = self.d[item[0]].append(None, [parent[0], temp,signame,item[3],count])
-                    #print parent,temp,count,signame,item[3],i,signame,count
+                    # add parent and get reference for child
+                    piter = self.d[item[0]].append(None, [parent[0], parentnum,signame,item[3],count])
+                    #print parent,parentnum,count,signame,item[3],i,signame,count
                     if count == 0: count = 1
                     else: count +=item[2]
+                ##########################
+                # if there are children:
+                ##########################
                 else:
-                    #print "parsing child"
+                    #print "parsing child",signame
+                    # add parent title
                     piter = self.d[item[0]].append(None, [parent[0],0,signame,item[3],count])
                     for j,child in enumerate(parent[1]):
-                        signame=_PD[item[3]][count]
-                        #print i,count,parent[0],child,signame,item[3], _PD[item[3]].index(signame),count
-                        self.d[item[0]].append(piter, [child, count,signame,item[3],count])
-                        count +=item[2]
+                        print len(child[1]), child[0]
+                        #if item[0] =='_gpioisignaltree':
+                            #print item[0], child[0],len(child[1])
+                        #############################
+                        # If grandchildren
+                        #############################
+                        if len(child[1]) > 1:
+                            # add child and get reference
+                            citer = self.d[item[0]].append(piter, [child[0], 0,signame,item[3],count])
+                            if item[0] =='_gpioisignaltree':
+                                print 'add to CHILD list',child[0]
+                                print 'Strig:',child[1]
+                            for k,grandchild in enumerate(child[1]):
+                                print 'raw grand:  ', grandchild
+                                #############################
+                                # If greatchildren
+                                #############################
+                                #print grandchild[0],grandchild[1]
+                                if len(grandchild) > 1:
+                                    print 'add to grandchild child list',grandchild[0]
+                                    index = _PD[item[3]].index(grandchild[1])
+                                    self.d[item[0]].append(citer, [grandchild[0],index,grandchild[1],item[3],index])
+                                    continue
+                                else:
+                                    #############################
+                                    # If No greatchildren
+                                    #############################
+                                    try:
+                                        signame=_PD[item[3]][count]
+                                    except:
+                                        signame = 'none'
+                                    print 'adding to grandchild to childlist:  ', grandchild,signame,item[3],count
+                                    # add grandchild
+                                    self.d[item[0]].append(piter, [child,0,signame,item[3],count])
+                                    #count +=item[2]
+
+                        ####################
+                        # No grandchildren
+                        ####################
+                        else:
+                            print' add to child - no grandchild',child
+                            signame=_PD[item[3]][count]
+                            #print i,count,parent[0],child,signame,item[3], _PD[item[3]].index(signame),count
+                            self.d[item[0]].append(piter, [child, count,signame,item[3],count])
+                            count +=item[2]
+                            
+
         self.d._notusedsignaltree = gtk.TreeStore(str,int,str,str,int)
         self.d._notusedsignaltree.append(None, [_PD.human_notused_names[0][0],0,'unused-unused','_notusedsignaltree',0])
         # make a filter for sserial encoder as they can't be used for AXES
