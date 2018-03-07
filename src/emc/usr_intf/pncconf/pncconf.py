@@ -4770,6 +4770,10 @@ Clicking 'existing custom program' will aviod this warning. "),False):
             #self.w[pinname].set_model(tree)
             # an error probably means the signal name cannot be found
             # set it as unused rather then error
+
+            itr = self.find_sig_name_iter(tree, datap)
+            self.widgets[pinname].set_active_iter(itr)
+            return
             try:
                 signalindex = signal.index(datap)
             except:
