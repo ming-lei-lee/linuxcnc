@@ -5823,6 +5823,12 @@ Clicking 'existing custom program' will aviod this warning. "),False):
 # Common Helper functions
 #********************
 
+    def tandem_check(self, letter):
+        tandem_stepper = self.d.make_pinname(self.stepgen_sig("%s2"%letter))
+        tandem_pwm = self.d.make_pinname(self.pwmgen_sig("%s2"%letter))
+        print letter, bool(tandem_stepper or tandem_pwm), tandem_stepper, tandem_pwm
+        return bool(tandem_stepper or tandem_pwm)
+
     def stepgen_sig(self, axis):
            thisaxisstepgen =  axis + "-stepgen-step" 
            test = self.d.findsignal(thisaxisstepgen)

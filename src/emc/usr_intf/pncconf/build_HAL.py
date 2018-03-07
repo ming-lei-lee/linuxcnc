@@ -138,7 +138,7 @@ class HAL:
             #if not self.d.findsignal(i+"-encoder-a") and not self.d.findsignal(i+"-resolver"):
             #    continue
             temp = temp + "pid.%s,"%i
-            tandemjoint = self.tandem_check(i)
+            tandemjoint = self.a.tandem_check(i)
             if tandemjoint:
                 temp = temp + "pid.%s2,"%i
         # if user requested PID components add them to the list as well, starting at 0 and working up
@@ -366,7 +366,7 @@ class HAL:
         jnum = 0
         # Always add X axis
         self.connect_joint(file, jnum, 'x')
-        tandemjoint = self.tandem_check('x')
+        tandemjoint = self.a.tandem_check('x')
         if tandemjoint:
             jnum += 1
             self.connect_joint(file, jnum, 'x2')
@@ -375,7 +375,7 @@ class HAL:
         if self.d.axes in(0,1):
             jnum += 1
             self.connect_joint(file, jnum, 'y')
-            tandemjoint = self.tandem_check('y')
+            tandemjoint = self.a.tandem_check('y')
             if tandemjoint:
                 jnum += 1
                 self.connect_joint(file, jnum, 'y2')
@@ -383,7 +383,7 @@ class HAL:
         # Always add Z Axis ##################
         jnum += 1
         self.connect_joint(file, jnum, 'z')
-        tandemjoint = self.tandem_check('z')
+        tandemjoint = self.a.tandem_check('z')
         if tandemjoint:
             jnum += 1
             self.connect_joint(file, jnum, 'z2')
@@ -392,7 +392,7 @@ class HAL:
         if self.d.axes == 1:
             jnum += 1
             self.connect_joint(file, jnum, 'a')
-            tandemjoint = self.tandem_check('a')
+            tandemjoint = self.a.tandem_check('a')
             if tandemjoint:
                 jnum += 1
                 self.connect_joint(file, jnum, 'a2')
@@ -1069,12 +1069,6 @@ class HAL:
 #*******************
 # helper functions
 #*******************
-
-    def tandem_check(self, letter):
-        tandem_stepper = self.d.make_pinname(self.a.stepgen_sig("%s2"%letter))
-        tandem_pwm = self.d.make_pinname(self.a.pwmgen_sig("%s2"%letter))
-        print letter, bool(tandem_stepper or tandem_pwm), tandem_stepper, tandem_pwm
-        return bool(tandem_stepper or tandem_pwm)
 
     def build_pid(self, file, jnum, let, stepflag):
         title = 'JOINT'
