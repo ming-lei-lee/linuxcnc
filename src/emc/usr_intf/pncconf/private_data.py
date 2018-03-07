@@ -156,10 +156,10 @@ class Private_Data:
         (   self.ANALOGIN, self.DUMMY3) = self.pintype_analog_in = [ _("Analog Input"),_("Dummy")]
 
         #***************************
-        # signal names
+        # HAL signal names
         #***************************
         (S.UNUSED_UNUSED,S.UNUSED_DUMMY) = self.hal_notused_names = ["unused-unused","unused_dummy"]
-        self.human_notused_names = [ [_("Unused Unused"),[] ] ]
+
         (   self.UNUSED_OUTPUT,
             S.ON,S.CW,S.CCW,S.BRAKE,
             S.MIST,S.FLOOD,S.ESTOP,S.AMP,
@@ -181,30 +181,6 @@ class Private_Data:
             "z-hall1-out","z-hall2-out","z-hall3-out","z-gray-c1-out","z-gray-c2-out","z-gray-C4-out","z-gray-C8-out",
             "a-hall1-out","a-hall2-out","a-hall3-out","a-gray-c1-out","a-gray-c2-out","a-gray-C4-out","a-gray-C8-out",
             "s-hall1-out","s-hall2-out","s-hall3-out","s-gray-c1-out","s-gray-c2-out","s-gray-C4-out","s-gray-C8-out", ]
-
-        spindle_output = [_("Spindle ON"),_("Spindle CW"), _("Spindle CCW"), _("Spindle Brake") ]
-        coolant_output = [_("Coolant Mist"), _("Coolant Flood")]
-        control_output = [_("ESTOP Out"), _("Machine Is Enabled"),_("X Amplifier Enable"),
-            _("Y Amplifier Enable"),_("Z Amplifier Enable"), _("A Amplifier Enable"),
-            _("Charge Pump"),_("Force Pin True")]
-        digital_output = [_("Digital out 0"), _("Digital out 1"), _("Digital out 2"), _("Digital out 3")]
-        xmotor_control = [_("X HALL 1"),_("X HALL 2"),_("X HALL 3"),
-                _("X Gray C1"),_("X Gray C2"),_("X Gray C4"),_("X Gray C8")]
-        ymotor_control = [_("Y HALL 1"),_("Y HALL 2"),_("Y HALL 3"),
-                _("Y Gray C1"),_("Y Gray C2"),_("Y Gray C4"),_("Y Gray C8")]
-        zmotor_control = [_("Z HALL 1"),_("Z HALL 2"),_("Z HALL 3"),
-                _("Z Gray C1"),_("Z Gray C2"),_("Z Gray C4"),_("Z Gray C8")]
-        amotor_control = [_("A HALL 1"),_("A HALL 2"),_("A HALL 3"),
-                _("A Gray C1"),_("A Gray C2"),_("A Gray C4"),_("A Gray C8")]
-        smotor_control = [_("S HALL 1"),_("S HALL 2"),_("S HALL 3"),
-                _("S Gray C1"),_("S Gray C2"),_("S Gray C4"),_("S Gray C8")]
-
-        self.human_output_names = [ [_("Unused Output"),[]],[_("Spindle"),spindle_output],
-            [_("Coolant"),coolant_output],[_("Control"),control_output],
-            [_("Digital"),digital_output],[_("X BLDC Control"),xmotor_control],
-            [_("Y BLDC Control"),ymotor_control],[_("Z BLDC Control"),zmotor_control],
-            [_("A BLDC Control"),amotor_control],[_(" S BLDC Control"),smotor_control,],
-            [_("Custom Signals"),[]]  ]
 
         ###
         (   S.UNUSED_INPUT,
@@ -268,97 +244,6 @@ class Private_Data:
             "max-home-x2", "max-home-y2", "max-home-z2", "max-home-a2",
             "both-home-x2", "both-home-y2", "both-home-z2", "both-home-a2"]
 
-        limit = [[_("X Minimum Limit"),S.MIN_X ], [_("Y Minimum Limit"),S.MIN_Y ], [_("Z Minimum Limit"),S.MIN_Z ], [_("A Minimum Limit"),S.MIN_A ],
-            [_("X Maximum Limit"),S.MAX_X ], [_("Y Maximum Limit"),S.MAX_Y ], [_("Z Maximum Limit"),S.MAX_Z ], [_("A Maximum Limit"),S.MAX_A ],
-            [_("X Both Limit"),S.BOTH_X ], [_("Y Both Limit"),S.BOTH_Y ], [_("Z Both Limit"),S.BOTH_Z ], [_("A Both Limit"), S.BOTH_A],
-            [_("All Limits"),S.ALL_LIMIT] ]
-        limit2 = [[_("X2 Minimum Limit"),S.MIN_X2 ], [_("Y2 Minimum Limit"),S.MIN_Y2 ], [_("Z2 Minimum Limit"),S.MIN_Z2 ], [_("A2 Minimum Limit"),S.MIN_A2 ],
-            [_("X2 Maximum Limit"),S.MAX_X2 ], [_("Y2 Maximum Limit"),S.MAX_Y2 ], [_("Z2 Maximum Limit"),S.MAX_Z2 ], [_("A2 Maximum Limit"),S.MAX_A2 ],
-            [_("X2 Both Limit"),S.BOTH_X2 ], [_("Y2 Both Limit"),S.BOTH_Y2 ], [_("Z2 Both Limit"),S.BOTH_Z2 ], [_("A2 Both Limit"), S.BOTH_A2], ]
-
-        home = [[_("X Home"),S.HOME_X ], [_("Y Home"),S.HOME_Y ], [_("Z Home"),S.HOME_Z ], [_("A Home"),S.HOME_A ],[_("All Home"),S.ALL_HOME ] ]
-        home2 = [[_("X2 Tandem Home"),S.HOME_X2 ], [_("Y2 Tandem Home"),S.HOME_Y2 ], [_("Z2 Tandem Home"),S.HOME_Z2 ], [_("A2 Tandem Home"),S.HOME_A2 ] ]
-        home_limits_shared = [[_("X Minimum Limit + Home"),S.MIN_HOME_X ],
-            [_("Y Minimum Limit + Home"),S.MIN_HOME_Y ], [_("Z Minimum Limit + Home"),S.MIN_HOME_Z ],
-            [_("A Minimum Limit + Home"),S.MIN_HOME_A ],[_("X Maximum Limit + Home"),S.MAX_HOME_X ],
-            [_("Y Maximum Limit + Home"),S.MAX_HOME_Y ], [_("Z Maximum Limit + Home"),S.MAX_HOME_Z ],
-            [_("A Maximum Limit + Home"),S.MAX_HOME_A ],[_("X Both Limit + Home"),S.BOTH_HOME_X ], 
-            [_("Y Both Limit + Home"),S.BOTH_HOME_Y ], [_("Z Both Limit + Home"),S.BOTH_HOME_Z ],
-            [_("A Both Limit + Home"),S.BOTH_HOME_A ], [_("All Limits + Home"),S.ALL_LIMIT_HOME ] ]
-        home_limits_shared2 = [[_("X2 Minimum Limit + Home"),S.MIN_HOME_X2 ],
-            [_("Y2 Minimum Limit + Home"),S.MIN_HOME_Y2 ], [_("Z2 Minimum Limit + Home"),S.MIN_HOME_Z2 ],
-            [_("A2 Minimum Limit + Home"),S.MIN_HOME_A2 ],[_("X2 Maximum Limit + Home"),S.MAX_HOME_X2 ],
-            [_("Y2 Maximum Limit + Home"),S.MAX_HOME_Y2 ], [_("Z2 Maximum Limit + Home"),S.MAX_HOME_Z2 ],
-            [_("A2 Maximum Limit + Home"),S.MAX_HOME_A2 ],[_("X2 Both Limit + Home"),S.BOTH_HOME_X2 ], 
-            [_("Y2 Both Limit + Home"),S.BOTH_HOME_Y2 ], [_("Z2 Both Limit + Home"),S.BOTH_HOME_Z2 ],
-            [_("A2 Both Limit + Home"),S.BOTH_HOME_A2 ], ]
-
-        digital = [ _("Digital in 0"), _("Digital in 1"), _("Digital in 2"), _("Digital in 3") ]
-        axis_select = [_("Joint select A"),_("Joint select B"),_("Joint select C"), _("Joint select D") ]
-        override = [_("Jog incr A"),_("Jog incr B"),_("Jog incr C"),
-            _("Jog incr D"),_("Feed Override incr A"),_("Feed Override incr B"),
-            _("Feed Override incr C"),_("Feed Override incr D"),_("Spindle Override incr A"),
-            _("Spindle Override incr B"),_("Spindle Override incr C"),_("Spindle Override incr D"),
-            _("Max Vel Override incr A"),_("Max Vel Override incr B"),_("Max Vel Override incr C"),
-            _("Max Vel Override incr D"), _("Feed Override enable"), _("Spindle Override enable"),
-            _("Max Vel Override enable") ]
-        spindle = [ _("Manual Spindle CW"),_("Manual Spindle CCW"),_("Manual Spindle Stop"),
-            _("Spindle Up-To-Speed"),_("Gear Select A"),]
-        operation =  [_("Cycle Start"),_("Abort"),_("Single Step") ]
-        control = [_("ESTOP In"), _("Probe In") ]
-        xmotor_control = [_("X HALL 1"),_("X HALL 2"),_("X HALL 3"),
-            _("X Gray C1"),_("X Gray C2"),_("X Gray C4"),_("X Gray C8")]
-        ymotor_control = [_("Y HALL 1"),_("Y HALL 2"),_("Y HALL 3"),
-            _("Y Gray C1"),_("Y Gray C2"),_("Y Gray C4"),_("Y Gray C8")]
-        zmotor_control = [_("Z HALL 1"),_("Z HALL 2"),_("Z HALL 3"),
-            _("Z Gray C1"),_("Z Gray C2"),_("Z Gray C4"),_("Z Gray C8")]
-        amotor_control = [_("A HALL 1"),_("A HALL 2"),_("A HALL 3"),
-            _("A Gray C1"),_("A Gray C2"),_("A Gray C4"),_("A Gray C8")]
-        smotor_control = [_("S HALL 1"),_("S HALL 2"),_("S HALL 3"),
-            _("S Gray C1"),_("S Gray C2"),_("S Gray C4"),_("S Gray C8")]
-        rapid = [_("Jog X +"),_("Jog X -"),_("Jog Y +"),_("Jog Y -"),
-            _("Jog Z +"),_("Jog Z -"),_("Jog A +"),_("Jog A -"),
-            _("Jog button selected +"),_("Jog button selected -") ]
-
-        digital = [ [_("Digital in 0"),S.DIN0 ], [_("Digital in 1"),S.DIN1 ], [_("Digital in 2"),S.DIN2 ], [_("Digital in 3"),S.DIN3 ] ]
-        axis_select = [[_("Joint select A"),S.SELECT_A ],[_("Joint select B"),S.SELECT_B ],[_("Joint select C"),S.SELECT_C ], [_("Joint select D"),S.SELECT_D ] ]
-        override = [[_("Jog incr A"),S.JOGA ],[_("Jog incr B"),S.JOGB ],[_("Jog incr C"),S.JOGC ],
-            [_("Jog incr D"),S.JOGD ],[_("Feed Override incr A"),S.FOA ],[_("Feed Override incr B"), S.FOB],
-            [_("Feed Override incr C"),S.FOC ],[_("Feed Override incr D"),S.FOD ],[_("Spindle Override incr A"),S.SOA ],
-            [_("Spindle Override incr B"),S.SOB ],[_("Spindle Override incr C"),S.SOC ],[_("Spindle Override incr D"),S.SOD ],
-            [_("Max Vel Override incr A"),S.MVOA ],[_("Max Vel Override incr B"),S.MVOB ],[_("Max Vel Override incr C"),S.MVOC ],
-            [_("Max Vel Override incr D"),S.MVOD ], [_("Feed Override enable"),S.FOE ], [_("Spindle Override enable"),S.SOE ],
-            [_("Max Vel Override enable"),S.MVOE ] ]
-        spindle = [ [_("Manual Spindle CW"),S.SPINDLE_CW ],[_("Manual Spindle CCW"),S.SPINDLE_CCW ],[_("Manual Spindle Stop"),S.SPINDLE_STOP ],
-            [_("Spindle Up-To-Speed"),S.SPINDLE_AT_SPEED ],[_("Gear Select A"),S.GEAR_SELECT_A ] ]
-        operation =  [[_("Cycle Start"),S.CYCLE_START ],[_("Abort"),S.ABORT ],[_("Single Step"),S.SINGLE_STEP ] ]
-        control = [[_("ESTOP In"),S.ESTOP_IN ], [_("Probe In"),S.PROBE ] ]
-        rapid = [[_("Jog X +"),S.JOGX_P ],[_("Jog X -"),S.JOGX_N ],[_("Jog Y +"),S.JOGY_P ],[_("Jog Y -"),S.JOGY_N ],
-            [_("Jog Z +"),S.JOGZ_P ],[_("Jog Z -"),S.JOGZ_N ],[_("Jog A +"),S.JOGA_P ],[_("Jog A -"),S.JOGA_N ],
-            [_("Jog button selected +"),S.JOGSLCT_P ],[_("Jog button selected -"),S.JOGSLCT_N ] ]
-        xmotor_control = [[_("X HALL 1"),S.X_HALL1_IN ],[_("X HALL 2"),S.X_HALL2_IN ],[_("X HALL 3"),S.X_HALL3_IN ],
-            [_("X Gray C1"),S.X_C1_IN ],[_("X Gray C2"),S.X_C2_IN ],[_("X Gray C4"),S.X_C4_IN ],[_("X Gray C8"),S.X_C8_IN ]]
-        ymotor_control = [[_("Y HALL 1"),S.Y_HALL1_IN ],[_("Y HALL 2"),S.Y_HALL2_IN ],[_("Y HALL 3"),S.Y_HALL3_IN ],
-            [_("Y Gray C1"),S.Y_C1_IN ],[_("Y Gray C2"),S.Y_C2_IN ],[_("Y Gray C4"),S.Y_C4_IN ],[_("Y Gray C8"),S.Y_C8_IN ]]
-        zmotor_control = [[_("Z HALL 1"),S.Z_HALL1_IN ],[_("Z HALL 2"),S.Z_HALL2_IN ],[_("Z HALL 3"),S.Z_HALL1_IN ],
-            [_("Z Gray C1"),S.Z_C1_IN ],[_("Z Gray C2"),S.Z_C2_IN ],[_("Z Gray C4"),S.Z_C4_IN ],[_("Z Gray C8"),S.Z_C8_IN ]]
-        amotor_control = [[_("A HALL 1"),S.A_HALL1_IN ],[_("A HALL 2"),S.A_HALL2_IN ],[_("A HALL 3"),S.A_HALL3_IN ],
-            [_("A Gray C1"),S.A_C1_IN ],[_("A Gray C2"),S.A_C2_IN ],[_("A Gray C4"),S.A_C4_IN ],[_("A Gray C8"),S.A_C8_IN ]]
-        smotor_control = [[_("S HALL 1"),S.S_HALL1_IN ],[_("S HALL 2"),S.S_HALL2_IN ],[_("S HALL 3"),S.S_HALL3_IN ],
-            [_("S Gray C1"),S.S_C1_IN ],[_("S Gray C2"),S.S_C2_IN ],[_("S Gray C4"),S.S_C4_IN ],[_("S Gray C8"),S.S_C8_IN ]]
-
-        blimits = [["Main Axis",limit],["Tandem Axis",limit2]]
-        bhome = [["Main Axis",home],["Tandem Axis",home2]]
-        bshared = [["Main Axis",home_limits_shared],["Tandem Axis",home_limits_shared2]]
-        self.human_input_names = [ [_("Unused Input"),S.UNUSED_INPUT],[_("Limits"),blimits],
-            [_("Home"),bhome],[_("Limts/Home Shared"),bshared],
-            [_("Digital"),digital],[_("Axis Selection"),axis_select],[_("Overrides"),override],
-            [_("Spindle"),spindle],[_("Operation"),operation],[_("External Control"),control],
-            [_("Axis rapid"),rapid],[_("X BLDC Control"),xmotor_control],
-            [_("Y BLDC Control"),ymotor_control],[_("Z BLDC Control"),zmotor_control],
-            [_("A BLDC Control"),amotor_control],
-            [_("S BLDC Control"),smotor_control],[_("Custom Signals"),[]] ]
-
         (   S.UNUSED_PWM,
             S.X_PWM_PULSE,S.X_PWM_DIR,S.X_PWM_ENABLE,  S.Y_PWM_PULSE,S.Y_PWM_DIR,S.Y_PWM_ENABLE,
             S.Z_PWM_PULSE,S.Z_PWM_DIR,S.Z_PWM_ENABLE,  S.A_PWM_PULSE,S.A_PWM_DIR,S.A_PWM_ENABLE,
@@ -372,15 +257,6 @@ class Private_Data:
             "s-pwm-pulse", "s-pwm-dir", "s-pwm-enable",
             "x2-pwm-pulse", "x2-pwm-dir", "x2-pwm-enable", "y2-pwm-pulse", "y2-pwm-dir", "y2-pwm-enable",
             "z2-pwm-pulse", "z2-pwm-dir", "z2-pwm-enable", "a2-pwm-pulse", "a2-pwm-dir", "a2-pwm-enable"]
-
-        tpwm = [[_("X2 Tandem PWM"), S.X2_PWM_PULSE], [_("Y2 Tandem PWM"), S.Y2_PWM_PULSE],
-             [_("Z2 Tandem PWM"), S.Z2_PWM_PULSE], [_("A2 Tandem PWM"), S.A2_PWM_PULSE]]
-        mpwm =[[_("X Axis PWM"), S.X_PWM_PULSE],[_("Y Axis PWM"), S.Y_PWM_PULSE],
-            [_("Z Axis PWM"), S.Z_PWM_PULSE],[_("A Axis PWM"), S.A_PWM_PULSE]]
-        tandem_pwm = [["Main Axis",mpwm],["Tandem Axis",tpwm]]
-        self.human_pwm_output_names =[ [_("Unused PWM Gen"), S.UNUSED_PWM],[_("Axis PWM"),
-            tandem_pwm],[_("Spindle PWM"), S.SPINDLE_PWM_PULSE],
-            [_("Custom Signals"),[]] ]
 
         (   S.UNUSED_ENCODER,
             S.X_ENCODER_A,S.X_ENCODER_B,S.X_ENCODER_I,S.X_ENCODER_M,
@@ -414,38 +290,14 @@ class Private_Data:
             "z2-encoder-a", "z2-encoder-b", "z2-encoder-i", "z2-encoder-m",
             "a2-encoder-a", "a2-encoder-b", "a2-encoder-i", "a2-encoder-m",]
 
-        axis = [[_("X Encoder"), S.X_ENCODER_A], [_("Y Encoder"), S.Y_ENCODER_A], 
-                [_("Z Encoder"), S.Z_ENCODER_A], [_("A Encoder"), S.A_ENCODER_A],
-                 [_("Spindle Encoder"), S.SPINDLE_ENCODER_A]]
-        taxis = [[_("X2 Tandem Encoder"), S.X2_ENCODER_A], [_("Y2 Tandem Encoder"), S.Y2_ENCODER_A],
-                 [_("Z2 Tandem Encoder"), S.Z2_ENCODER_A], [_("A2 Encoder"), S.A2_ENCODER_A]]
-        mpg = [[_("X Hand Wheel"), S.X_MPG_A], [_("Y Hand Wheel"), S.Y_MPG_A],
-                 [_("Z Hand Wheel"), S.Z_MPG_A], [_("A Hand Wheel"), S.A_MPG_A],
-                 [_("Multi Hand Wheel"), S.SELECT_MPG_A]]
-        over = [[_("Feed Override"),  S.FO_MPG_A], [_("spindle Override"),  S.SO_MPG_A],[_("Max Vel Override"),  S.MVO_MPG_A]]
-        tandem_enc = [["Main Axis",axis],["Tandem Axis",taxis]]
-        self.human_encoder_input_names = [ [_("Unused Encoder"), S.UNUSED_ENCODER],[_("Axis Encoder"), tandem_enc],
-            [_("MPG Jog Controls"), mpg],[_("Override MPG control"), over],[_("Tandem Axis Encoder"), taxis],
-            [_("Custom Signals"),[]] ]
-
-        self.human_resolver_input_names =[ [_("Unused Resolver"),[]],[_("X Resolver"), []],
-            [_("Y Resolver"), []],[_("Z Resolver"), []],
-            [_("A Resolver"), []],[_("S Resolver"), []],[_("Custom Signals"),[]] ]
-
         (   S.USED_RESOLVER,S.X_RESOLVER,S.Y_RESOLVER,
                 S.Z_RESOLVER,S.A_RESOLVER,S.S_RESOLVER
         ) = self.hal_resolver_input_names = ["unused-resolver","x-resolver","y-resolver",
                 "z-resolver","a-resolver","s-resolver"]
 
-        self.human_8i20_input_names =[ [_("Unused 8I20"),[]],[_("X Axis"), []],[_("Y Axis"), []],[_("Z Axis"), []],
-            [_("A Axis"), []],[_("Spindle"), []],[_("Custom Signals"),[]] ]
-
         (   S.USED_8I20,S.X_8I20,S.Y_8I20,S.Z_8I20,S.A_8I20,S_8I20
         ) = self.hal_8i20_input_names =[
             "unused-8i20","x-8i20","y-8i20","z-8i20","a-8i20","s-8i20"]
-
-        self.human_pot_output_names =[ [_("Unused Analog Output"),[]],[_("Spindle Output"), []],
-            [_("Custom Signals"),[]] ]
 
         (   S.USED_POT,S_POT_OUT,S_POT_ENABLE  )= self.hal_pot_output_names = ["unused-pot",
             "s-pot-output","s-pot-enable"]
@@ -489,17 +341,6 @@ class Private_Data:
             "z2-stepgen-phase-d", "z2-stepgen-phase-e", "z2-stepgen-phase-f",
             "charge-pump-out","cp-dir","cp-pc","cp-pd","cp-fe","cp-pf"]
 
-        main_step = [[_("X Axis StepGen"),S.X_STEPGEN_STEP],
-                [_("Y Axis StepGen"),S.Y_STEPGEN_STEP],[_("Z Axis StepGen"),S.Z_STEPGEN_STEP],
-                [_("A Axis StepGen"),S.A_STEPGEN_STEP] ]
-        tandem_step = [ [_("X2 Tandem StepGen"),S.X2_STEPGEN_STEP],[_("Y2 Tandem StepGen"),S.Y2_STEPGEN_STEP],
-                [_("Z2 Tandem StepGen"),S.Z2_STEPGEN_STEP]]
-        bstep = [["Main Axis",main_step],["Tandem Axis",tandem_step]]
-        self.human_stepper_names = [ [_("Unused StepGen"),S.UNUSED_STEPGEN],
-            ["Axis",bstep],
-            [_("Charge Pump StepGen"), S.CHARGE_PUMP_STEP], [_("Spindle StepGen"), S.SPINDLE_STEPGEN_STEP],
-            [_("Custom Signals"),[]] ]
-
         (   S.UNUSED_TPPWM,
             S.X_TPPWM_A,S.X_TPPWM_B,S.X_TPPWM_C,S.X_TPPWM_AN,
             S.X_TPPWM_BN,S.X_TPPWM_CN,S.X_TPPWM_ENABLE,S.X_TPPWM_FAULT,
@@ -524,11 +365,6 @@ class Private_Data:
             "s-tppwm-a","s-tppwm-b","s-tppwm-c","s-tppwm-anot",
             "s-tppwm-bnot","s-tppwm-cnot", "s-tppwm-enable","s-tppwm-fault"]
 
-        self.human_tppwm_output_names = [ [_("Unused TPPWM Gen"),[]], [_("X Axis BL Driver"),[]],
-            [ _("Y Axis BL Driver"),[]], [_("Z Axis BL Driver"),[]],
-            [_("A Axis BL Driver"),[]], [_("S Axis BL Driver"),[]],
-            [_("Custom Signals"),[]] ]
-
         (   S.UNUSED_SSERIAL, S.A8I20_T, S.A8I20_R, S.A8I20_E,
             S.I7I64_T, S.I7I64_R, S.I7I64_E, S.I7I69_T, S.I7I69_R, S.I7I69_E,
             S.I7I70_T, S.I7I70_R, S.I7I70_E, S.I7I71_T, S.I7I71_R, S.I7I71_E, 
@@ -543,7 +379,154 @@ class Private_Data:
             "7i76-m0-t","7i76-m0-r","7i76-m0-e", "7i76-m2-t","7i76-m2-r","7i76-m2-e",
             "7i77-m0-t","7i77-m0-r","7i77-m0-e","7i77-m3-t","7i77-m3-r","7i77-m3-e",
             "7i73-m1-t","7i73-m1-r","7i73-m1-e","7i84-m0-t","7i84-m0-r","7i84-m0-e","7i84-m3-t","7i84-m3-r","7i84-m3-e"]
- 
+
+        (S.UNUSED_ANALOG_IN) = self.hal_analog_input_names = ["unused-analog-input"]
+
+        #*************************
+        # Human names for HAL signals
+        #*************************
+
+        # These have three levels of columns
+        home = [[_("X Home"),S.HOME_X ], [_("Y Home"),S.HOME_Y ], [_("Z Home"),S.HOME_Z ], [_("A Home"),S.HOME_A ],[_("All Home"),S.ALL_HOME ] ]
+        home2 = [[_("X2 Tandem Home"),S.HOME_X2 ], [_("Y2 Tandem Home"),S.HOME_Y2 ], [_("Z2 Tandem Home"),S.HOME_Z2 ], [_("A2 Tandem Home"),S.HOME_A2 ] ]
+        home_limits_shared = [[_("X Minimum Limit + Home"),S.MIN_HOME_X ],
+            [_("Y Minimum Limit + Home"),S.MIN_HOME_Y ], [_("Z Minimum Limit + Home"),S.MIN_HOME_Z ],
+            [_("A Minimum Limit + Home"),S.MIN_HOME_A ],[_("X Maximum Limit + Home"),S.MAX_HOME_X ],
+            [_("Y Maximum Limit + Home"),S.MAX_HOME_Y ], [_("Z Maximum Limit + Home"),S.MAX_HOME_Z ],
+            [_("A Maximum Limit + Home"),S.MAX_HOME_A ],[_("X Both Limit + Home"),S.BOTH_HOME_X ], 
+            [_("Y Both Limit + Home"),S.BOTH_HOME_Y ], [_("Z Both Limit + Home"),S.BOTH_HOME_Z ],
+            [_("A Both Limit + Home"),S.BOTH_HOME_A ], [_("All Limits + Home"),S.ALL_LIMIT_HOME ] ]
+        home_limits_shared2 = [[_("X2 Minimum Limit + Home"),S.MIN_HOME_X2 ],
+            [_("Y2 Minimum Limit + Home"),S.MIN_HOME_Y2 ], [_("Z2 Minimum Limit + Home"),S.MIN_HOME_Z2 ],
+            [_("A2 Minimum Limit + Home"),S.MIN_HOME_A2 ],[_("X2 Maximum Limit + Home"),S.MAX_HOME_X2 ],
+            [_("Y2 Maximum Limit + Home"),S.MAX_HOME_Y2 ], [_("Z2 Maximum Limit + Home"),S.MAX_HOME_Z2 ],
+            [_("A2 Maximum Limit + Home"),S.MAX_HOME_A2 ],[_("X2 Both Limit + Home"),S.BOTH_HOME_X2 ], 
+            [_("Y2 Both Limit + Home"),S.BOTH_HOME_Y2 ], [_("Z2 Both Limit + Home"),S.BOTH_HOME_Z2 ],
+            [_("A2 Both Limit + Home"),S.BOTH_HOME_A2 ], ]
+
+        digital = [ [_("Digital in 0"),S.DIN0 ], [_("Digital in 1"),S.DIN1 ], [_("Digital in 2"),S.DIN2 ], [_("Digital in 3"),S.DIN3 ] ]
+        axis_select = [[_("Joint select A"),S.SELECT_A ],[_("Joint select B"),S.SELECT_B ],
+                [_("Joint select C"),S.SELECT_C ], [_("Joint select D"),S.SELECT_D ] ]
+        override = [[_("Jog incr A"),S.JOGA ],[_("Jog incr B"),S.JOGB ],[_("Jog incr C"),S.JOGC ],
+            [_("Jog incr D"),S.JOGD ],[_("Feed Override incr A"),S.FOA ],[_("Feed Override incr B"), S.FOB],
+            [_("Feed Override incr C"),S.FOC ],[_("Feed Override incr D"),S.FOD ],[_("Spindle Override incr A"),S.SOA ],
+            [_("Spindle Override incr B"),S.SOB ],[_("Spindle Override incr C"),S.SOC ],[_("Spindle Override incr D"),S.SOD ],
+            [_("Max Vel Override incr A"),S.MVOA ],[_("Max Vel Override incr B"),S.MVOB ],[_("Max Vel Override incr C"),S.MVOC ],
+            [_("Max Vel Override incr D"),S.MVOD ], [_("Feed Override enable"),S.FOE ], [_("Spindle Override enable"),S.SOE ],
+            [_("Max Vel Override enable"),S.MVOE ] ]
+        spindle = [ [_("Manual Spindle CW"),S.SPINDLE_CW ],[_("Manual Spindle CCW"),S.SPINDLE_CCW ],[_("Manual Spindle Stop"),S.SPINDLE_STOP ],
+            [_("Spindle Up-To-Speed"),S.SPINDLE_AT_SPEED ],[_("Gear Select A"),S.GEAR_SELECT_A ] ]
+        operation =  [[_("Cycle Start"),S.CYCLE_START ],[_("Abort"),S.ABORT ],[_("Single Step"),S.SINGLE_STEP ] ]
+        control = [[_("ESTOP In"),S.ESTOP_IN ], [_("Probe In"),S.PROBE ] ]
+        rapid = [[_("Jog X +"),S.JOGX_P ],[_("Jog X -"),S.JOGX_N ],[_("Jog Y +"),S.JOGY_P ],[_("Jog Y -"),S.JOGY_N ],
+            [_("Jog Z +"),S.JOGZ_P ],[_("Jog Z -"),S.JOGZ_N ],[_("Jog A +"),S.JOGA_P ],[_("Jog A -"),S.JOGA_N ],
+            [_("Jog button selected +"),S.JOGSLCT_P ],[_("Jog button selected -"),S.JOGSLCT_N ] ]
+        xmotor_control = [[_("X HALL 1"),S.X_HALL1_IN ],[_("X HALL 2"),S.X_HALL2_IN ],[_("X HALL 3"),S.X_HALL3_IN ],
+            [_("X Gray C1"),S.X_C1_IN ],[_("X Gray C2"),S.X_C2_IN ],[_("X Gray C4"),S.X_C4_IN ],[_("X Gray C8"),S.X_C8_IN ]]
+        ymotor_control = [[_("Y HALL 1"),S.Y_HALL1_IN ],[_("Y HALL 2"),S.Y_HALL2_IN ],[_("Y HALL 3"),S.Y_HALL3_IN ],
+            [_("Y Gray C1"),S.Y_C1_IN ],[_("Y Gray C2"),S.Y_C2_IN ],[_("Y Gray C4"),S.Y_C4_IN ],[_("Y Gray C8"),S.Y_C8_IN ]]
+        zmotor_control = [[_("Z HALL 1"),S.Z_HALL1_IN ],[_("Z HALL 2"),S.Z_HALL2_IN ],[_("Z HALL 3"),S.Z_HALL1_IN ],
+            [_("Z Gray C1"),S.Z_C1_IN ],[_("Z Gray C2"),S.Z_C2_IN ],[_("Z Gray C4"),S.Z_C4_IN ],[_("Z Gray C8"),S.Z_C8_IN ]]
+        amotor_control = [[_("A HALL 1"),S.A_HALL1_IN ],[_("A HALL 2"),S.A_HALL2_IN ],[_("A HALL 3"),S.A_HALL3_IN ],
+            [_("A Gray C1"),S.A_C1_IN ],[_("A Gray C2"),S.A_C2_IN ],[_("A Gray C4"),S.A_C4_IN ],[_("A Gray C8"),S.A_C8_IN ]]
+        smotor_control = [[_("S HALL 1"),S.S_HALL1_IN ],[_("S HALL 2"),S.S_HALL2_IN ],[_("S HALL 3"),S.S_HALL3_IN ],
+            [_("S Gray C1"),S.S_C1_IN ],[_("S Gray C2"),S.S_C2_IN ],[_("S Gray C4"),S.S_C4_IN ],[_("S Gray C8"),S.S_C8_IN ]]
+        limit = [[_("X Minimum Limit"),S.MIN_X ], [_("Y Minimum Limit"),S.MIN_Y ], [_("Z Minimum Limit"),S.MIN_Z ], [_("A Minimum Limit"),S.MIN_A ],
+            [_("X Maximum Limit"),S.MAX_X ], [_("Y Maximum Limit"),S.MAX_Y ], [_("Z Maximum Limit"),S.MAX_Z ], [_("A Maximum Limit"),S.MAX_A ],
+            [_("X Both Limit"),S.BOTH_X ], [_("Y Both Limit"),S.BOTH_Y ], [_("Z Both Limit"),S.BOTH_Z ], [_("A Both Limit"), S.BOTH_A],
+            [_("All Limits"),S.ALL_LIMIT] ]
+        limit2 = [[_("X2 Minimum Limit"),S.MIN_X2 ], [_("Y2 Minimum Limit"),S.MIN_Y2 ], [_("Z2 Minimum Limit"),S.MIN_Z2 ], [_("A2 Minimum Limit"),S.MIN_A2 ],
+            [_("X2 Maximum Limit"),S.MAX_X2 ], [_("Y2 Maximum Limit"),S.MAX_Y2 ], [_("Z2 Maximum Limit"),S.MAX_Z2 ], [_("A2 Maximum Limit"),S.MAX_A2 ],
+            [_("X2 Both Limit"),S.BOTH_X2 ], [_("Y2 Both Limit"),S.BOTH_Y2 ], [_("Z2 Both Limit"),S.BOTH_Z2 ], [_("A2 Both Limit"), S.BOTH_A2], ]
+
+        blimits = [["Main Axis",limit],["Tandem Axis",limit2]]
+        bhome = [["Main Axis",home],["Tandem Axis",home2]]
+        bshared = [["Main Axis",home_limits_shared],["Tandem Axis",home_limits_shared2]]
+        self.human_input_names = [ [_("Unused Input"),S.UNUSED_INPUT],[_("Limits"),blimits],
+            [_("Home"),bhome],[_("Limts/Home Shared"),bshared],
+            [_("Digital"),digital],[_("Axis Selection"),axis_select],[_("Overrides"),override],
+            [_("Spindle"),spindle],[_("Operation"),operation],[_("External Control"),control],
+            [_("Axis rapid"),rapid],[_("X BLDC Control"),xmotor_control],
+            [_("Y BLDC Control"),ymotor_control],[_("Z BLDC Control"),zmotor_control],
+            [_("A BLDC Control"),amotor_control],
+            [_("S BLDC Control"),smotor_control],[_("Custom Signals"),[]] ]
+        #
+        tpwm = [[_("X2 Tandem PWM"), S.X2_PWM_PULSE], [_("Y2 Tandem PWM"), S.Y2_PWM_PULSE],
+             [_("Z2 Tandem PWM"), S.Z2_PWM_PULSE], [_("A2 Tandem PWM"), S.A2_PWM_PULSE]]
+        mpwm =[[_("X Axis PWM"), S.X_PWM_PULSE],[_("Y Axis PWM"), S.Y_PWM_PULSE],
+            [_("Z Axis PWM"), S.Z_PWM_PULSE],[_("A Axis PWM"), S.A_PWM_PULSE]]
+        tandem_pwm = [["Main Axis",mpwm],["Tandem Axis",tpwm]]
+        self.human_pwm_output_names =[ [_("Unused PWM Gen"), S.UNUSED_PWM],[_("Axis PWM"),
+            tandem_pwm],[_("Spindle PWM"), S.SPINDLE_PWM_PULSE],
+            [_("Custom Signals"),[]] ]
+        #
+        main_step = [[_("X Axis StepGen"),S.X_STEPGEN_STEP],
+                [_("Y Axis StepGen"),S.Y_STEPGEN_STEP],[_("Z Axis StepGen"),S.Z_STEPGEN_STEP],
+                [_("A Axis StepGen"),S.A_STEPGEN_STEP] ]
+        tandem_step = [ [_("X2 Tandem StepGen"),S.X2_STEPGEN_STEP],[_("Y2 Tandem StepGen"),S.Y2_STEPGEN_STEP],
+                [_("Z2 Tandem StepGen"),S.Z2_STEPGEN_STEP]]
+        bstep = [["Main Axis",main_step],["Tandem Axis",tandem_step]]
+        self.human_stepper_names = [ [_("Unused StepGen"),S.UNUSED_STEPGEN],
+            ["Axis",bstep],
+            [_("Charge Pump StepGen"), S.CHARGE_PUMP_STEP], [_("Spindle StepGen"), S.SPINDLE_STEPGEN_STEP],
+            [_("Custom Signals"),[]] ]
+        #
+        axis = [[_("X Encoder"), S.X_ENCODER_A], [_("Y Encoder"), S.Y_ENCODER_A], 
+                [_("Z Encoder"), S.Z_ENCODER_A], [_("A Encoder"), S.A_ENCODER_A],
+                 [_("Spindle Encoder"), S.SPINDLE_ENCODER_A]]
+        taxis = [[_("X2 Tandem Encoder"), S.X2_ENCODER_A], [_("Y2 Tandem Encoder"), S.Y2_ENCODER_A],
+                 [_("Z2 Tandem Encoder"), S.Z2_ENCODER_A], [_("A2 Encoder"), S.A2_ENCODER_A]]
+        mpg = [[_("X Hand Wheel"), S.X_MPG_A], [_("Y Hand Wheel"), S.Y_MPG_A],
+                 [_("Z Hand Wheel"), S.Z_MPG_A], [_("A Hand Wheel"), S.A_MPG_A],
+                 [_("Multi Hand Wheel"), S.SELECT_MPG_A]]
+        over = [[_("Feed Override"),  S.FO_MPG_A], [_("spindle Override"),  S.SO_MPG_A],[_("Max Vel Override"),  S.MVO_MPG_A]]
+        tandem_enc = [["Main Axis",axis],["Tandem Axis",taxis]]
+        self.human_encoder_input_names = [ [_("Unused Encoder"), S.UNUSED_ENCODER],[_("Axis Encoder"), tandem_enc],
+            [_("MPG Jog Controls"), mpg],[_("Override MPG control"), over],[_("Tandem Axis Encoder"), taxis],
+            [_("Custom Signals"),[]] ]
+
+        # These have two levels of columns
+        self.human_notused_names = [ [_("Unused Unused"),[] ] ]
+        spindle_output = [_("Spindle ON"),_("Spindle CW"), _("Spindle CCW"), _("Spindle Brake") ]
+        coolant_output = [_("Coolant Mist"), _("Coolant Flood")]
+        control_output = [_("ESTOP Out"), _("Machine Is Enabled"),_("X Amplifier Enable"),
+            _("Y Amplifier Enable"),_("Z Amplifier Enable"), _("A Amplifier Enable"),
+            _("Charge Pump"),_("Force Pin True")]
+        digital_output = [_("Digital out 0"), _("Digital out 1"), _("Digital out 2"), _("Digital out 3")]
+        xmotor_control = [_("X HALL 1"),_("X HALL 2"),_("X HALL 3"),
+                _("X Gray C1"),_("X Gray C2"),_("X Gray C4"),_("X Gray C8")]
+        ymotor_control = [_("Y HALL 1"),_("Y HALL 2"),_("Y HALL 3"),
+                _("Y Gray C1"),_("Y Gray C2"),_("Y Gray C4"),_("Y Gray C8")]
+        zmotor_control = [_("Z HALL 1"),_("Z HALL 2"),_("Z HALL 3"),
+                _("Z Gray C1"),_("Z Gray C2"),_("Z Gray C4"),_("Z Gray C8")]
+        amotor_control = [_("A HALL 1"),_("A HALL 2"),_("A HALL 3"),
+                _("A Gray C1"),_("A Gray C2"),_("A Gray C4"),_("A Gray C8")]
+        smotor_control = [_("S HALL 1"),_("S HALL 2"),_("S HALL 3"),
+                _("S Gray C1"),_("S Gray C2"),_("S Gray C4"),_("S Gray C8")]
+
+        self.human_output_names = [ [_("Unused Output"),[]],[_("Spindle"),spindle_output],
+            [_("Coolant"),coolant_output],[_("Control"),control_output],
+            [_("Digital"),digital_output],[_("X BLDC Control"),xmotor_control],
+            [_("Y BLDC Control"),ymotor_control],[_("Z BLDC Control"),zmotor_control],
+            [_("A BLDC Control"),amotor_control],[_(" S BLDC Control"),smotor_control,],
+            [_("Custom Signals"),[]]  ]
+
+        self.human_8i20_input_names =[ [_("Unused 8I20"),[]],[_("X Axis"), []],[_("Y Axis"), []],[_("Z Axis"), []],
+            [_("A Axis"), []],[_("Spindle"), []],[_("Custom Signals"),[]] ]
+
+        self.human_resolver_input_names =[ [_("Unused Resolver"),[]],[_("X Resolver"), []],
+            [_("Y Resolver"), []],[_("Z Resolver"), []],
+            [_("A Resolver"), []],[_("S Resolver"), []],[_("Custom Signals"),[]] ]
+
+        self.human_pot_output_names =[ [_("Unused Analog Output"),[]],[_("Spindle Output"), []],
+            [_("Custom Signals"),[]] ]
+
+
+        self.human_tppwm_output_names = [ [_("Unused TPPWM Gen"),[]], [_("X Axis BL Driver"),[]],
+            [ _("Y Axis BL Driver"),[]], [_("Z Axis BL Driver"),[]],
+            [_("A Axis BL Driver"),[]], [_("S Axis BL Driver"),[]],
+            [_("Custom Signals"),[]] ]
+
         self.human_sserial_names = [ [_("Unused Channel"),[]],[_("8i20 Amplifier Card"),[]],
             [ _("7i64 I/O Card"),[]],[ _("7i69 I/O Card"),[]],
             [ _("7i70 I/O Card"),[]],[ _("7i71 I/O Card"),[]],
@@ -552,7 +535,6 @@ class Private_Data:
             [ _("7i73 Mode 1 Pendant Card"),[]],
             [ _("7i84 Mode 1 I/O Card"),[]],[ _("7i84 Mode 3 I/O Card"),[]], ]
 
-        (S.UNUSED_ANALOG_IN) = self.hal_analog_input_names = ["unused-analog-input"]
         self.human_analog_input_names = [ [_("Unused Analog In"),[]],[_("Custom Signals"),[]] ]
 
         #*******************************
