@@ -473,16 +473,16 @@ class Private_Data:
         #
         axis = [[_("X Encoder"), S.X_ENCODER_A], [_("Y Encoder"), S.Y_ENCODER_A], 
                 [_("Z Encoder"), S.Z_ENCODER_A], [_("A Encoder"), S.A_ENCODER_A],
-                 [_("Spindle Encoder"), S.SPINDLE_ENCODER_A]]
+                ]
         taxis = [[_("X2 Tandem Encoder"), S.X2_ENCODER_A], [_("Y2 Tandem Encoder"), S.Y2_ENCODER_A],
-                 [_("Z2 Tandem Encoder"), S.Z2_ENCODER_A], [_("A2 Encoder"), S.A2_ENCODER_A]]
+                 [_("Z2 Tandem Encoder"), S.Z2_ENCODER_A], [_("A2 Tandem Encoder"), S.A2_ENCODER_A]]
         mpg = [[_("X Hand Wheel"), S.X_MPG_A], [_("Y Hand Wheel"), S.Y_MPG_A],
                  [_("Z Hand Wheel"), S.Z_MPG_A], [_("A Hand Wheel"), S.A_MPG_A],
                  [_("Multi Hand Wheel"), S.SELECT_MPG_A]]
         over = [[_("Feed Override"),  S.FO_MPG_A], [_("spindle Override"),  S.SO_MPG_A],[_("Max Vel Override"),  S.MVO_MPG_A]]
         tandem_enc = [["Main Axis",axis],["Tandem Axis",taxis]]
         self.human_encoder_input_names = [ [_("Unused Encoder"), S.UNUSED_ENCODER],[_("Axis Encoder"), tandem_enc],
-            [_("MPG Jog Controls"), mpg],[_("Override MPG control"), over],[_("Tandem Axis Encoder"), taxis],
+             [_("Spindle Encoder"), S.SPINDLE_ENCODER_A], [_("MPG Jog Controls"), mpg],[_("Override MPG control"), over],
             [_("Custom Signals"),[]] ]
 
         # These have two levels of columns
